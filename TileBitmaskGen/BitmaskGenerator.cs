@@ -9,8 +9,9 @@ namespace TileBitmaskGen
     internal class BitmaskGenerator
     {
         private string[] tileNames;
+        private string _defaultTileName; // Default tile name if no rules match
         private int[] tileBitmasks = new int[256]; // 256 possible bitmask combinations (2^8)
-
+        
         private List<TileRule> _rules;
 
         private const int BitmaskSize = 8; // 8 bits for 8 directions
@@ -23,20 +24,40 @@ namespace TileBitmaskGen
         private const int rightbit = 1 << 6; // 01000000
         private const int topRightbit = 1 << 7; // 10000000
 
-
         public BitmaskGenerator( )
         {
             _rules = new List<TileRule>( );
         }
 
-        public BitmaskGenerator(List<TileRule> ruleList)
+        public BitmaskGenerator(string defaultTileName)
+        {
+            _rules = new List<TileRule>( );
+            this._defaultTileName = defaultTileName;
+        }
+
+        public BitmaskGenerator(List<TileRule> ruleList, string defaultTileName)
         {
             if (ruleList == null)
             {
                 throw new ArgumentNullException(nameof(ruleList), "Rule list cannot be null.");
             }
+            if (ruleList.Count == 0)
+            {
+                throw new ArgumentException("Rule list cannot be empty.", nameof(ruleList));
+            }
+            if ( string.IsNullOrEmpty(defaultTileName) )
+            {
+                throw new ArgumentNullException(nameof(defaultTileName), "Default tile name cannot be null.");
+            }
+
             _rules = ruleList;
-            tileNames = _rules.Select(r => r.Name).ToArray( );
+            _defaultTileName = defaultTileName;
+            
+            List<string> ruleNames = new List<string>( );
+            ruleNames.Add( _defaultTileName );
+            ruleNames.AddRange( _rules.Select( r => r.Name ) );
+            tileNames = ruleNames.ToArray( );
+
             GenerateBitmasks( );
         }
 
@@ -57,7 +78,7 @@ namespace TileBitmaskGen
                 int matchingRuleIndex = _rules.FindIndex(rule =>
                     rule.Check(top, topLeft, left, bottomLeft, bottom, bottomRight, right, topRight)
                 );
-                bitmask = matchingRuleIndex >= 0 ? matchingRuleIndex : 0;
+                bitmask = matchingRuleIndex >= 0 ? matchingRuleIndex+1 : 0;
 
                 //for (int k = 0 ; k < _rules.Count ; k++)
                 //{
@@ -68,6 +89,7 @@ namespace TileBitmaskGen
                 //        break; // Stop at the first matching rule
                 //    }
                 //}
+
                 tileBitmasks[i] = bitmask;
             }
         }
@@ -78,6 +100,11 @@ namespace TileBitmaskGen
             {
                 throw new InvalidOperationException("Tile names are not initialized. Please set the rules first.");
             }
+            if (tileBitmasks == null || tileBitmasks.Length == 0)
+            {
+                throw new InvalidOperationException("Tile bitmasks are not initialized. Please set the rules first.");
+            }
+
             GenerateBitmasks( );
             return tileBitmasks;
         }
@@ -91,17 +118,40 @@ namespace TileBitmaskGen
             return tileNames;
         }
 
-        public void SetRules(List<TileRule> rules)
+        public void SetRules(List<TileRule> rules, string defaultName)
         {
             if (rules == null || rules.Count == 0)
             {
                 throw new ArgumentException("Rules cannot be null or empty.", nameof(rules));
             }
+            if (string.IsNullOrEmpty(defaultName))
+            {
+                throw new ArgumentNullException(nameof(defaultName), "Default tile name cannot be null or empty.");
+            }
+            _defaultTileName = defaultName;
             _rules = rules;
             tileNames = _rules.Select(r => r.Name).ToArray( );
             GenerateBitmasks( ); // Regenerate bitmasks when rules are set
 
         }
+
+        public int GetTileCount
+        {
+            get
+            {
+                return GetTileCountInternal( );
+            } 
+        }
+        
+        private int GetTileCountInternal( )
+        {
+            if (tileNames == null || tileNames.Length == 0)
+            {
+                throw new InvalidOperationException("Tile names are not initialized. Please set the rules first.");
+            }
+            return tileNames.Length;
+        }
+
     }
 
 }
