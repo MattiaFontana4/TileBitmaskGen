@@ -19,19 +19,17 @@ namespace TileBitmaskGen
 
         public StringBuilder GenerateBitmaskStringBuilderCSharp( )
         {
-            if(_bitmask == null || _tileNames == null || _tileNames.Length == 0)
+            if (_bitmask == null || _tileNames == null || _tileNames.Length == 0)
             {
                 throw new InvalidOperationException("Bitmask or tile names are not properly initialized.");
             }
-            int[] bitmask = new int[256];
-            bitmask[0] = 1;
 
             StringBuilder sb = new StringBuilder( );
             sb.AppendLine("using System;");
             sb.AppendLine("using System.Collections.Generic;");
             sb.AppendLine("using System.Linq;");
             sb.AppendLine("using System.Text;");
-            sb.AppendLine();
+            sb.AppendLine( );
             sb.AppendLine("namespace TileBitmask");
             sb.AppendLine("{");
             sb.AppendLine("    internal class TileBitmask");
@@ -43,9 +41,9 @@ namespace TileBitmaskGen
             sb.AppendLine("         int[] bitmask = new int[256];");
 
             // Generate the bitmask string
-            for (int i = 0; i < _bitmask.Length; i++)
+            for (int i = 0 ; i < _bitmask.Length ; i++)
             {
-                sb.AppendLine("         bitmask[" + i.ToString( ) + "] = " + bitmask[i].ToString( ) + ";");
+                sb.AppendLine("         bitmask[" + i.ToString( ) + "] = " + _bitmask[i].ToString( ) + ";");
             }
             sb.AppendLine("         return bitmask;");
             sb.AppendLine("         }");
@@ -55,9 +53,9 @@ namespace TileBitmaskGen
             // Generating the getTileNames method
             sb.AppendLine("         public string[] getTileNames()");
             sb.AppendLine("         {");
-            sb.AppendLine("         string[] tileNames = new string[" + _tileNames.Count() + "];");
+            sb.AppendLine("         string[] tileNames = new string[" + _tileNames.Count( ) + "];");
 
-            for (int i = 0 ; i < _bitmask.Length ; i++)
+            for (int i = 0 ; i < _tileNames.Length ; i++)
             {
                 sb.AppendLine("         tileNames[" + i.ToString( ) + "] = " + _tileNames[i].ToString( ) + ";");
             }
@@ -120,6 +118,32 @@ namespace TileBitmaskGen
             return sb;
         }
 
+        public string GenerateBitmaskStringJava( )
+        {
+            StringBuilder sb = GenerateBitmaskStringBuilderJava( );
+            return sb.ToString( );
+        }
 
+        public string GenerateBitmaskString(outputLanguage language)
+        {
+            switch (language)
+            {
+                case outputLanguage.CSharp:
+                    return GenerateBitmaskStringCSharp( );
+                case outputLanguage.Java:
+                    return GenerateBitmaskStringJava( );
+                default:
+                    throw new NotSupportedException("Unsupported output language: " + language);
+            }
+        }
+
+
+    }
+
+
+    public enum outputLanguage
+    {
+        CSharp,
+        Java
     }
 }
