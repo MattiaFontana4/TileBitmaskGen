@@ -41,9 +41,8 @@
             textBox1 = new TextBox( );
             Rules = new GroupBox( );
             panelRules = new Panel( );
-            panel1 = new Panel( );
+            buttonCompute = new Button( );
             Rules.SuspendLayout( );
-            panelRules.SuspendLayout( );
             SuspendLayout( );
             // 
             // JsonPath
@@ -61,6 +60,7 @@
             loadJsonbtn.TabIndex = 1;
             loadJsonbtn.Text = "LoadJson";
             loadJsonbtn.UseVisualStyleBackColor = true;
+            loadJsonbtn.Click += loadJsonbtn_Click;
             // 
             // label1
             // 
@@ -79,6 +79,7 @@
             browseBtn.TabIndex = 3;
             browseBtn.Text = "Browse";
             browseBtn.UseVisualStyleBackColor = true;
+            browseBtn.Click += browseBtn_Click;
             // 
             // comboBoxOutType
             // 
@@ -122,6 +123,7 @@
             button1.TabIndex = 8;
             button1.Text = "Browse";
             button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // label4
             // 
@@ -152,24 +154,26 @@
             // panelRules
             // 
             panelRules.AutoScroll = true;
-            panelRules.Controls.Add(panel1);
             panelRules.Location = new Point(6, 22);
             panelRules.Name = "panelRules";
             panelRules.Size = new Size(938, 475);
             panelRules.TabIndex = 0;
             // 
-            // panel1
+            // buttonCompute
             // 
-            panel1.Location = new Point(3, 3);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(932, 141);
-            panel1.TabIndex = 0;
+            buttonCompute.Location = new Point(828, 164);
+            buttonCompute.Name = "buttonCompute";
+            buttonCompute.Size = new Size(139, 38);
+            buttonCompute.TabIndex = 12;
+            buttonCompute.Text = "Compute";
+            buttonCompute.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(988, 734);
+            Controls.Add(buttonCompute);
             Controls.Add(Rules);
             Controls.Add(textBox1);
             Controls.Add(label4);
@@ -185,7 +189,6 @@
             Name = "Form1";
             Text = "Form1";
             Rules.ResumeLayout(false);
-            panelRules.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout( );
         }
@@ -205,12 +208,6 @@
         private TextBox textBox1;
         private GroupBox Rules;
         private Panel panelRules;
-        private Panel panel1;
-
-
-
-
-
-
+        private Button buttonCompute;
     }
 }

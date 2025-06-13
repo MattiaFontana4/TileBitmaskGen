@@ -2,9 +2,12 @@ namespace TileBitmaskGen
 {
     public partial class Form1 : Form
     {
-        public Form1()
+        private uint _ruleCount = 0; // Counter for rules
+
+
+        public Form1( )
         {
-            InitializeComponent();
+            InitializeComponent( );
         }
 
         private Panel CreateRulePanel(int ruleIndex)
@@ -104,5 +107,19 @@ namespace TileBitmaskGen
             return panel;
         }
 
+        private void loadJsonbtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void browseBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
