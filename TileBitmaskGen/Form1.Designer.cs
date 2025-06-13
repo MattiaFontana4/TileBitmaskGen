@@ -1,4 +1,6 @@
-﻿namespace TileBitmaskGen
+﻿using System.Drawing;
+
+namespace TileBitmaskGen
 {
     partial class Form1
     {
@@ -42,6 +44,8 @@
             Rules = new GroupBox( );
             panelRules = new Panel( );
             buttonCompute = new Button( );
+            openFileDialog = new OpenFileDialog( );
+            saveFileDialog1 = new SaveFileDialog( );
             Rules.SuspendLayout( );
             SuspendLayout( );
             // 
@@ -51,9 +55,12 @@
             JsonPath.Name = "JsonPath";
             JsonPath.Size = new Size(719, 23);
             JsonPath.TabIndex = 0;
+            JsonPath.TextChanged += JsonPath_TextChanged;
+            JsonPath.DataContextChanged += JsonPath_DataContextChanged;
             // 
             // loadJsonbtn
             // 
+            loadJsonbtn.Enabled = false;
             loadJsonbtn.Location = new Point(909, 32);
             loadJsonbtn.Name = "loadJsonbtn";
             loadJsonbtn.Size = new Size(67, 23);
@@ -83,12 +90,19 @@
             // 
             // comboBoxOutType
             // 
+            comboBoxOutType.DataSource = new outputType[]
+    {
+    outputType.Json,
+    outputType.CSharpClass,
+    outputType.JavaClass,
+    outputType.CppClass
+    };
             comboBoxOutType.FormattingEnabled = true;
-            comboBoxOutType.Items.AddRange(new object[] { "CSharp", "Java", "Cpp" });
             comboBoxOutType.Location = new Point(103, 66);
             comboBoxOutType.Name = "comboBoxOutType";
             comboBoxOutType.Size = new Size(121, 23);
             comboBoxOutType.TabIndex = 4;
+            comboBoxOutType.SelectedValueChanged += comboBoxOutType_SelectedValueChanged;
             // 
             // label2
             // 
@@ -168,6 +182,11 @@
             buttonCompute.Text = "Compute";
             buttonCompute.UseVisualStyleBackColor = true;
             // 
+            // openFileDialog
+            // 
+            openFileDialog.FileName = "openFileDialog";
+            openFileDialog.Title = "Select Json";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -209,5 +228,7 @@
         private GroupBox Rules;
         private Panel panelRules;
         private Button buttonCompute;
+        private OpenFileDialog openFileDialog;
+        private SaveFileDialog saveFileDialog1;
     }
 }

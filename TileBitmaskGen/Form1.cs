@@ -114,12 +114,94 @@ namespace TileBitmaskGen
 
         private void browseBtn_Click(object sender, EventArgs e)
         {
+            var openFileDialog = new OpenFileDialog
+            {
+                Filter = "JSON files (*.json)|*.json|All files (*.*)|*.*",
+                Title = "Select JSON File"
+            };
 
+            if (openFileDialog.ShowDialog( ) == DialogResult.OK)
+            {
+                JsonPath.Text = openFileDialog.FileName;
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            string filter = string.Empty;
+
+            switch (comboBoxOutType.SelectedItem)
+            {
+                case outputType.Json:
+                    filter = "JSON files (*.json)|*.json|All files (*.*)|*.*";
+                    break;
+                case outputType.CSharpClass:
+                    filter = "C# Class files (*.cs)|*.cs|All files (*.*)|*.*";
+                    break;
+                case outputType.JavaClass:
+                    filter = "Java Class files (*.java)|*.java|All files (*.*)|*.*";
+                    break;
+                case outputType.CppClass:
+                    filter = "C++ Class files (*.cpp)|*.cpp|All files (*.*)|*.*";
+                    break;
+            }
+
+            var saveFileDialog = new SaveFileDialog
+            {
+                Filter = filter,
+                Title = "Save Output File"
+            };
+
+            if (saveFileDialog.ShowDialog( ) == DialogResult.OK)
+            {
+                OutputPath.Text = saveFileDialog.FileName;
+            }
+        }
+
+        private void JsonPath_DataContextChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void JsonPath_TextChanged(object sender, EventArgs e)
+        {
+            string path = JsonPath.Text;
+            loadJsonbtn.Enabled = !string.IsNullOrEmpty(path) && File.Exists(path) && string.Equals(Path.GetExtension(path), ".json", StringComparison.OrdinalIgnoreCase);
+        }
+
+        private void comboBoxOutType_SelectedValueChanged(object sender, EventArgs e)
+        {
+            var selectedType = comboBoxOutType.SelectedItem as outputType?;
+            string path = OutputPath.Text;
+
+            if (selectedType.HasValue)
+            {
+                switch (selectedType.Value)
+                {
+                    case outputType.Json:
+                        OutputPath.Text = Path.ChangeExtension(path, ".json");
+                        break;
+                    case outputType.CSharpClass:
+                        OutputPath.Text = Path.ChangeExtension(path, ".cs");
+                        break;
+                    case outputType.JavaClass:
+                        OutputPath.Text = Path.ChangeExtension(path, ".java");
+                        break;
+                    case outputType.CppClass:
+                        OutputPath.Text = Path.ChangeExtension(path, ".cpp");
+                        break;
+                }
+            }
 
         }
     }
+
+    public enum  outputType
+    {
+        Json,
+        CSharpClass,
+        JavaClass,
+        CppClass
+    }
+
+
 }
