@@ -46,6 +46,7 @@ namespace TileBitmaskGen
             buttonCompute = new Button( );
             openFileDialog = new OpenFileDialog( );
             saveFileDialog1 = new SaveFileDialog( );
+            addRulebtn = new Button( );
             Rules.SuspendLayout( );
             SuspendLayout( );
             // 
@@ -90,12 +91,12 @@ namespace TileBitmaskGen
             // 
             // comboBoxOutType
             // 
-            comboBoxOutType.DataSource = new outputType[]
+            comboBoxOutType.DataSource = new OutputType[]
     {
-    outputType.Json,
-    outputType.CSharpClass,
-    outputType.JavaClass,
-    outputType.CppClass
+    OutputType.Json,
+    OutputType.CSharpClass,
+    OutputType.JavaClass,
+    OutputType.CppClass
     };
             comboBoxOutType.FormattingEnabled = true;
             comboBoxOutType.Location = new Point(103, 66);
@@ -181,17 +182,29 @@ namespace TileBitmaskGen
             buttonCompute.TabIndex = 12;
             buttonCompute.Text = "Compute";
             buttonCompute.UseVisualStyleBackColor = true;
+            buttonCompute.Click += buttonCompute_Click;
             // 
             // openFileDialog
             // 
             openFileDialog.FileName = "openFileDialog";
             openFileDialog.Title = "Select Json";
             // 
+            // addRulebtn
+            // 
+            addRulebtn.Location = new Point(32, 179);
+            addRulebtn.Name = "addRulebtn";
+            addRulebtn.Size = new Size(95, 23);
+            addRulebtn.TabIndex = 13;
+            addRulebtn.Text = "Add rule";
+            addRulebtn.UseVisualStyleBackColor = true;
+            addRulebtn.Click += addRulebtn_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(988, 734);
+            Controls.Add(addRulebtn);
             Controls.Add(buttonCompute);
             Controls.Add(Rules);
             Controls.Add(textBox1);
@@ -230,5 +243,6 @@ namespace TileBitmaskGen
         private Button buttonCompute;
         private OpenFileDialog openFileDialog;
         private SaveFileDialog saveFileDialog1;
+        private Button addRulebtn;
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,11 +28,18 @@ namespace TileBitmaskGen.BitmaskGeneratorJson
 
         public void WriteRulesToJson()
         {
+
             if (string.IsNullOrEmpty(_jsonFilePath))
             {
                 throw new InvalidOperationException("JSON file path is not set.");
             }
-            string jsonContent = Newtonsoft.Json.JsonConvert.SerializeObject(_rules, Newtonsoft.Json.Formatting.Indented);
+            var settings = new JsonSerializerSettings
+            {
+                Converters = { new Newtonsoft.Json.Converters.StringEnumConverter( ) }
+            };
+
+
+            string jsonContent = Newtonsoft.Json.JsonConvert.SerializeObject(_rules, Newtonsoft.Json.Formatting.Indented, settings);
             System.IO.File.WriteAllText(_jsonFilePath, jsonContent);
         }
 

@@ -169,15 +169,15 @@ namespace TileBitmaskGen
             return sb.ToString( );
         }
 
-        public string GenerateBitmaskString(outputLanguage language)
+        public string GenerateBitmaskString(OutputLanguage language)
         {
             switch (language)
             {
-                case outputLanguage.CSharp:
+                case OutputLanguage.CSharp:
                     return GenerateBitmaskStringCSharp( );
-                case outputLanguage.Java:
+                case OutputLanguage.Java:
                     return GenerateBitmaskStringJava( );
-                case outputLanguage.Cpp:
+                case OutputLanguage.Cpp:
                     return GenerateBitmaskStringCpp( );
                 default:
                     throw new NotSupportedException("Unsupported output language: " + language);
@@ -188,7 +188,7 @@ namespace TileBitmaskGen
     }
 
 
-    public enum outputLanguage
+    public enum OutputLanguage
     {
         CSharp,
         Java,

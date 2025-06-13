@@ -15,6 +15,47 @@ namespace TileBitmaskGen
             set { _name = value; }
         }
 
+        public TileAdjacencyRule Top
+        {
+            get => top;
+            set => top = value;
+        }
+        public TileAdjacencyRule TopLeft
+        {
+            get => topLeft;
+            set => topLeft = value;
+        }
+        public TileAdjacencyRule Left
+        {
+            get => left;
+            set => left = value;
+        }
+        public TileAdjacencyRule BottomLeft
+        {
+            get => bottomLeft;
+            set => bottomLeft = value;
+        }
+        public TileAdjacencyRule Bottom
+        {
+            get => bottom;
+            set => bottom = value;
+        }
+        public TileAdjacencyRule BottomRight
+        {
+            get => bottomRight;
+            set => bottomRight = value;
+        }
+        public TileAdjacencyRule Right
+        {
+            get => right;
+            set => right = value;
+        }
+        public TileAdjacencyRule TopRight
+        {
+            get => topRight;
+            set => topRight = value;
+        }
+
         private TileAdjacencyRule top;
         private TileAdjacencyRule topLeft;
         private TileAdjacencyRule left;
