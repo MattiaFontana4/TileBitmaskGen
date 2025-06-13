@@ -124,6 +124,51 @@ namespace TileBitmaskGen
             return sb.ToString( );
         }
 
+        public StringBuilder GenerateBitmaskStringBuilderCpp()
+        {
+            if (_bitmask == null || _tileNames == null || _tileNames.Length == 0)
+            {
+                throw new InvalidOperationException("Bitmask or tile names are not properly initialized.");
+            }
+
+            StringBuilder sb = new StringBuilder( );
+            sb.AppendLine("#include <vector>");
+            sb.AppendLine("#include <string>");
+            sb.AppendLine( );
+            sb.AppendLine("namespace tilebitmask {");
+            sb.AppendLine( );
+            sb.AppendLine("class TileBitmask {");
+            sb.AppendLine("public:");
+            sb.AppendLine("    static std::vector<int> getTileBitmask() {");
+            sb.AppendLine("        std::vector<int> bitmask(256);");
+            for (int i = 0 ; i < _bitmask.Length ; i++)
+            {
+                sb.AppendLine($"        bitmask[{i}] = {_bitmask[i]};");
+            }
+            sb.AppendLine("        return bitmask;");
+            sb.AppendLine("    }");
+            sb.AppendLine( );
+            sb.AppendLine("    static std::vector<std::string> getTileNames() {");
+            sb.AppendLine($"        std::vector<std::string> tileNames({_tileNames.Length});");
+            for (int i = 0 ; i < _tileNames.Length ; i++)
+            {
+                sb.AppendLine($"        tileNames[{i}] = \"{_tileNames[i]}\";");
+            }
+            sb.AppendLine("        return tileNames;");
+            sb.AppendLine("    }");
+            sb.AppendLine("};");
+            sb.AppendLine( );
+            sb.AppendLine("} // namespace tilebitmask");
+
+            return sb;
+        }
+
+        public string GenerateBitmaskStringCpp( )
+        {
+            StringBuilder sb = GenerateBitmaskStringBuilderCpp( );
+            return sb.ToString( );
+        }
+
         public string GenerateBitmaskString(outputLanguage language)
         {
             switch (language)
@@ -132,6 +177,8 @@ namespace TileBitmaskGen
                     return GenerateBitmaskStringCSharp( );
                 case outputLanguage.Java:
                     return GenerateBitmaskStringJava( );
+                case outputLanguage.Cpp:
+                    return GenerateBitmaskStringCpp( );
                 default:
                     throw new NotSupportedException("Unsupported output language: " + language);
             }
@@ -144,6 +191,7 @@ namespace TileBitmaskGen
     public enum outputLanguage
     {
         CSharp,
-        Java
+        Java,
+        Cpp
     }
 }
