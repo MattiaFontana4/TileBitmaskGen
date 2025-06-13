@@ -239,7 +239,7 @@ namespace TileBitmaskGen
                 case OutputType.Json:
                     // Handle JSON output generation
 
-                    var jsonGenerator = new BitmaskGeneratorJsonWritter(outputPath, _rules);
+                    var jsonGenerator = new BitmaskGeneratorJsonWriter(outputPath, _rules);
                     jsonGenerator.WriteRulesToJson( );
 
                     break;
