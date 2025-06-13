@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TileBitmaskGen
 {
-    internal class BitmaskGenerator
+    public class BitmaskGenerator
     {
         private string[] tileNames;
         private string _defaultTileName; // Default tile name if no rules match

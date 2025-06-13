@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TileBitmaskGen
 {
-    internal class TileRule
+    public class TileRule
     {
         string _name;
         public string Name
@@ -112,7 +112,7 @@ namespace TileBitmaskGen
     }
 
 
-    internal enum TileAdjacencyRule
+    public enum TileAdjacencyRule
     {
         Any = 0, // Matches any tile
         None = 1, // Matches no tiles
