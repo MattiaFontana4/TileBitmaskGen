@@ -43,7 +43,7 @@ namespace TileBitmaskGen
             // Generate the bitmask string
             for (int i = 0 ; i < _bitmask.Length ; i++)
             {
-                sb.AppendLine("         bitmask[" + i.ToString( ) + "] = " + _bitmask[i].ToString( ) + ";");
+                sb.AppendLine("            bitmask[" + i.ToString( ) + "] = " + _bitmask[i].ToString( ) + ";");
             }
             sb.AppendLine("         return bitmask;");
             sb.AppendLine("         }");
@@ -57,7 +57,7 @@ namespace TileBitmaskGen
 
             for (int i = 0 ; i < _tileNames.Length ; i++)
             {
-                sb.AppendLine("         tileNames[" + i.ToString( ) + "] = " + _tileNames[i].ToString( ) + ";");
+                sb.AppendLine("         tileNames[" + i.ToString( ) + "] = \"" + _tileNames[i].ToString( ) + "\";");
             }
 
             sb.AppendLine("         return tileNames;");
@@ -183,7 +183,6 @@ namespace TileBitmaskGen
                     throw new NotSupportedException("Unsupported output language: " + language);
             }
         }
-
 
     }
 
