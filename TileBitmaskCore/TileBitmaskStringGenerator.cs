@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TileBitmaskCore
 {
-    internal class TileBitmaskStringGenerator
+    public class TileBitmaskStringGenerator
     {
 
         private int[] _bitmask;

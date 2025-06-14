@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TileBitmaskCore.BitmaskGeneratorJson
 {
-    internal class BitmaskGeneratorJsonWriter
+    public class BitmaskGeneratorJsonWriter
     {
         private string _jsonFilePath;
         private List<TileRule> _rules;
