@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TileBitmaskGen
+namespace TileBitmaskCore
 {
-    internal class TileBitmaskStringGenerator
+    public class TileBitmaskStringGenerator
     {
 
         private int[] _bitmask;

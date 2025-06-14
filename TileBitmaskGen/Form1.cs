@@ -1,4 +1,5 @@
-using TileBitmaskGen.BitmaskGeneratorJson;
+using TileBitmaskCore.BitmaskGeneratorJson;
+using TileBitmaskCore;
 
 namespace TileBitmaskGen
 {
