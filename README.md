@@ -1,7 +1,8 @@
 # TileBitmaskGen
 
 TileBitmaskGen is a work-in-progress .NET 8 (C# 12) library for generating bitmask values and code for tile-based systems.
-The project aims to provide both programmatic tools and a graphical user interface to simplify the creation and export of tile bitmask data.
+The solution provides both a reusable library and a WinForms application to simplify the creation and export of tile bitmask data.
+
 ---
 
 ## Prerequisites
@@ -30,5 +31,13 @@ dotnet run --project TileBitmaskGen
 ## Projects
 
 - **TileBitmaskGen** – WinForms application used to create and export tile rules.
+- **TileBitmaskCore** – cross-platform library that contains the bitmask generation logic.
 - **TestProject** – Unit tests covering the bitmask generator logic.
 
+## Running tests
+
+Execute the unit tests with:
+
+```bash
+dotnet test
+```
