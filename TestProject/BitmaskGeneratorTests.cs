@@ -1,5 +1,5 @@
 using NUnit.Framework;
-using TileBitmaskGen;
+using TileBitmaskCore;
 using System.Collections.Generic;
 
 namespace TestProject

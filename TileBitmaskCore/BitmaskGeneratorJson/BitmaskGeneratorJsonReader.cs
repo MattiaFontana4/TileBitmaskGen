@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TileBitmaskGen.BitmaskGeneratorJson
+namespace TileBitmaskCore.BitmaskGeneratorJson
 {
     internal class BitmaskGeneratorJsonReader
     {
